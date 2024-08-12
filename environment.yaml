@@ -1,0 +1,4 @@
+name: odl-app-utils
+channels:
+  - defaults
+prefix: /home/jake/anaconda3/envs/odl-app-utils
