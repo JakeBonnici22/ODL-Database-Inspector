@@ -1,3 +1,6 @@
+from utils.helpers import read_sql_from_file
+
+
 def list_and_query_first_table(connection):
     """
     List all tables in the database and query the first table.
@@ -13,11 +16,7 @@ def list_and_query_first_table(connection):
 
         # List all tables in the database
         cursor = connection.cursor()
-        cursor.execute("""
-            SELECT TABLE_SCHEMA, TABLE_NAME
-            FROM INFORMATION_SCHEMA.TABLES
-            WHERE TABLE_TYPE = 'BASE TABLE'
-        """)
+        cursor.execute(read_sql_from_file('./resources/sql/list_all_tables.sql'))
 
         tables = cursor.fetchall()
         print("Tables in the database:")
@@ -34,9 +33,6 @@ def list_and_query_first_table(connection):
             rows = cursor.fetchall()
             for row in rows:
                 print(row)
-
-        # Close the connection
-        connection.close()
 
     except Exception as e:
         print("Error:", e)
